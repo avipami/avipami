@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I'm Vinnie</h1>
 <h3 align="center">A passionate IoT / iOS Developer from Sweden!</h3>
 
-- 🔭 I’m currently working on **Tillsammans**
+- 🔭 I’m currently working on **Tillsammans, Pour, Kasa**
 
 - 🌱 I’m currently learning **iOS, macOS**
 
