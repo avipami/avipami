@@ -1,15 +1,15 @@
 <h1 align="center">Hi 👋, I'm Vinnie</h1>
 <h3 align="center">A passionate IoT / iOS Developer from Sweden!</h3>
 
-- 🔭 I’m currently working on **Tillsammans, Pour, Kasa**
+- 🤓 Current workplace, **Bonnier News**
 
-- 🌱 I’m currently learning **iOS, macOS**
+- 🔭 My current private projects **Tillsammans, Pour, Kasa**
 
-- 👯 I’m looking to collaborate on **Tillsammans**
+- 🌱 I’m currently working with **iOS, macOS**
 
 - 📫 How to reach me **avipami@gmail.com**
 
-- ⚡ Fun fact **I bake rustic bread**
+- ⚡ Fun fact **I make homemade Ramen**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
