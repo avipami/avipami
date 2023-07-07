@@ -21,5 +21,6 @@
 
 **Latest fun : **
 
-![](https://github.com/avipami/avipami/blob/main/DynamicIslandGif.gif = 100)
+<img src="DynamicIslandGif.gif" height="250"/>
+![](https://github.com/avipami/avipami/blob/main/DynamicIslandGif.gif)
 
