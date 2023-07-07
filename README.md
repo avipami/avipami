@@ -21,5 +21,5 @@
 
 **Latest fun : **
 
-
+![](https://github.com/avipami/avipami/blob/main/DynamicIslandGif.gif)
 
