@@ -20,6 +20,6 @@
 
 
 <h3 align="center">Latest Fun:</h3>
-
+<p align="center">
 <img src="DynamicIslandGif.gif" height="300"/>
-
+</p>
