@@ -1,6 +1,6 @@
 <h1 align="center">Hi 👋, I'm Vinnie</h1>
 <h3 align="center">A passionate IoT / iOS Developer from Sweden!</h3>
-<p align="center">
+<p align="left">
 - 🤓 Current workplace, **Bonnier News**
 
 - 🔭 My current private projects **Tillsammans, Pour, Kasa**
