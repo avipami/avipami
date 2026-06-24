@@ -7,14 +7,14 @@
      iOS, React Native.
 
 - 🔭 My current private projects i alternate between
-     Max Altitude - on app store
-     Velosaver - on app store
-     Hamstra - soon on app store / google play
-     OurSaga
-     Hittad
-     Nästa
-     Pucko
-     Kasa soon on app store
+     - Max Altitude - on app store
+     - Velosaver - on app store
+     - Hamstra - soon on app store / google play
+     - OurSaga
+     - Hittad
+     - Nästa
+     - Pucko
+     - Kasa soon on app store
 
 - 🌱 I’m currently working with **iOS, macOS, kotlin mutliplatform, nodeJs**
 
