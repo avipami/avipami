@@ -2,14 +2,25 @@
 <h3 align="center">A passionate IoT / iOS Developer from Sweden!</h3>
 <p align="left">
 - 🤓 Current workplace, **Bonnier News**
+     I work with native app development ( iOS )
+     and internal tools and and internal AD SDK for 
+     iOS, React Native.
 
-- 🔭 My current private projects **Tillsammans, Pour, Kasa**
+- 🔭 My current private projects i alternate between
+**
+Max Altitude - on app store
+Velosaver - on app store
+Hamstra - soon on app store / google play
+OurSaga
+Hittad
+Nästa
+Pucko
+Kasa soon on app store
+**
 
-- 🌱 I’m currently working with **iOS, macOS**
+- 🌱 I’m currently working with **iOS, macOS, kotlin mutliplatform, nodeJs**
 
 - 📫 How to reach me **avipami@gmail.com**
-
-- ⚡ Fun fact **I make homemade Ramen**
 
 </p>
 
