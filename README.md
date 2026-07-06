@@ -1,35 +1,66 @@
-<h1 align="center">Hi 👋, I'm Vinnie</h1>
-<h3 align="center">A passionate IoT / iOS Developer from Sweden!</h3>
-<p align="left">
-- 🤓 Current workplace, **Bonnier News**
-     I work with native app development ( iOS )
-     and internal tools and and internal AD SDK for 
-     iOS, React Native.
+<div align="center">
 
-- 🔭 My current private projects i alternate between
-     - Max Altitude - on app store
-     - Velosaver - on app store
-     - Hamstra - soon on app store / google play
-     - OurSaga
-     - Hittad
-     - Nästa
-     - Pucko
-     - Kasa soon on app store
+<img src="assets/dogfight.svg" alt="An X-wing chasing a TIE fighter through synthwave space" width="100%"/>
 
-- 🌱 I’m currently working with **iOS, macOS, kotlin mutliplatform, nodeJs**
+# Hi, I'm Vinnie 👋
 
-- 📫 How to reach me **avipami@gmail.com**
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=2800&pause=900&color=FF2D95&center=true&vCenter=true&width=520&lines=iOS+%2F+IoT+Developer+from+Sweden+%F0%9F%87%B8%F0%9F%87%AA;Swift+%C2%B7+Kotlin+Multiplatform+%C2%B7+Node.js;Into+code+and+synthwave+%F0%9F%8E%B9;May+the+Force+be+with+your+builds" alt="Typing intro: iOS / IoT developer from Sweden"/>
 
-</p>
+<img src="https://komarev.com/ghpvc/?username=avipami&color=ff2d95&style=flat-square&label=PROFILE+VIEWS" alt="Profile views"/>
 
-<h3 align="left">Connect with me:</h3>
+</div>
 
+## 🚀 What I do
 
-<h3 align="center">Languages and Tools:</h3>
-<p align="center"> <a href="https://www.arduino.cc/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/arduino-1.svg" alt="arduino" width="40" height="40"/> </a> <a href="https://developer.apple.com/swift/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/swift/swift-original.svg" alt="swift" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://www.cprogramming.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="40" height="40"/> </a> <a href="https://www.w3schools.com/cpp/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="cplusplus" width="40" height="40"/> </a> <a href="https://www.w3schools.com/cs/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="40" height="40"/> </a> <a href="https://flutter.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> <a href="https://www.photoshop.com/en" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/photoshop/photoshop-line.svg" alt="photoshop" width="40" height="40"/> </a> <a href="https://www.adobe.com/in/products/illustrator.html" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/adobe_illustrator/adobe_illustrator-icon.svg" alt="illustrator" width="40" height="40"/> </a> <a href="https://unity.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/unity3d/unity3d-icon.svg" alt="unity" width="40" height="40"/> </a> </p>
+- 💼 **Bonnier News** — native iOS development, internal tools and ad SDKs for iOS & React Native
+- 🌱 Currently building with **iOS, macOS, Kotlin Multiplatform and Node.js**
+- 🎹 Fueled by synthwave
+- 📫 Reach me at **avipami@gmail.com**
 
+## 🛰️ Side projects
 
-<h3 align="center">Latest Fun:</h3>
-<p align="center">
-<img src="DynamicIslandGif.gif" height="300"/>
-</p>
+| App | Status |
+| --- | --- |
+| **Max Altitude** | 🟢 On the App Store |
+| **VeloSaver** | 🟢 On the App Store |
+| **Hamstra** | 🟡 Soon on App Store / Google Play |
+| **Kasa** | 🟡 Soon on the App Store |
+| **OurSaga** · **Hittad** · **Nästa** · **Pucko** | 🧪 In the lab |
+
+## 🧰 Tech stack
+
+<div align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=swift,kotlin,nodejs,python,c,cpp,cs,java,flutter,firebase,arduino,unity,ps,ai&perline=7" alt="Swift, Kotlin, Node.js, Python, C, C++, C#, Java, Flutter, Firebase, Arduino, Unity, Photoshop, Illustrator"/>
+  </a>
+</div>
+
+## 📊 Stats
+
+<div align="center">
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=avipami&show_icons=true&theme=synthwave&hide_border=true&rank_icon=github" alt="GitHub stats"/>
+  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=avipami&layout=compact&theme=synthwave&hide_border=true&langs_count=8" alt="Top languages"/>
+  <br/>
+  <img src="https://streak-stats.demolab.com?user=avipami&theme=tokyonight&hide_border=true&background=1a1b27" alt="Contribution streak"/>
+</div>
+
+## 🐍 Contribution snake
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/avipami/avipami/output/snake-dark.svg"/>
+    <img src="https://raw.githubusercontent.com/avipami/avipami/output/snake.svg" alt="Snake eating my contribution graph"/>
+  </picture>
+</div>
+
+## 📱 Latest fun
+
+<div align="center">
+  <img src="DynamicIslandGif.gif" height="300" alt="Dynamic Island experiment"/>
+</div>
+
+---
+
+<div align="center">
+  <sub>⭐ From Stockholm with 🎹 — <em>these aren't the bugs you're looking for.</em></sub>
+</div>
