@@ -26,17 +26,9 @@ jobs:
             dist/snake.svg
             dist/snake-dark.svg?palette=github-dark
 
-      - name: Generate synthwave stats cards
-        # STATS_TOKEN is an optional classic PAT (scopes: repo, read:user) owned
-        # by avipami; when set, cards include private repo data. Without it the
-        # default token is used and cards are labeled "public repos only".
-        run: node scripts/generate-stats.mjs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          STATS_TOKEN: ${{ secrets.STATS_TOKEN }}
-          USER_LOGIN: avipami
-          OUT: dist
-          EXCLUDE_LANGS: ""
+      # Stats cards are intentionally NOT generated here: they include private
+      # repo data, so they are produced locally via scripts/update-stats.sh
+      # (committed to assets/stats/) and no token is ever stored in the cloud.
 
       - name: Publish to output branch
         uses: crazy-max/ghaction-github-pages@v4

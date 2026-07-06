@@ -38,10 +38,10 @@
 ## 📊 Stats
 
 <div align="center">
-  <img height="165" src="https://raw.githubusercontent.com/avipami/avipami/output/stats.svg" alt="GitHub stats"/>
-  <img height="165" src="https://raw.githubusercontent.com/avipami/avipami/output/langs.svg" alt="Top languages"/>
+  <img height="165" src="assets/stats/stats.svg" alt="GitHub stats"/>
+  <img height="165" src="assets/stats/langs.svg" alt="Top languages"/>
   <br/>
-  <img src="https://raw.githubusercontent.com/avipami/avipami/output/streak.svg" alt="Contribution streak"/>
+  <img src="assets/stats/streak.svg" alt="Contribution streak"/>
 </div>
 
 ## 🐍 Contribution snake

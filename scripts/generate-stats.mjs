@@ -67,6 +67,8 @@ const baseData = await gql(
           }
         }
       }
+      publicRepos: repositories(privacy: PUBLIC, ownerAffiliations: OWNER, isFork: false) { totalCount }
+      privateRepos: repositories(privacy: PRIVATE, ownerAffiliations: OWNER, isFork: false) { totalCount }
       contributionsCollection {
         totalCommitContributions
         totalPullRequestContributions
@@ -74,6 +76,10 @@ const baseData = await gql(
         totalPullRequestReviewContributions
         restrictedContributionsCount
         contributionCalendar { totalContributions }
+        commitContributionsByRepository(maxRepositories: 100) {
+          contributions { totalCount }
+          repository { primaryLanguage { name color } }
+        }
       }
     }
   }`,
@@ -139,15 +145,38 @@ for (const repo of user.repositories.nodes)
     cur.size += e.size;
     langTotals.set(e.node.name, cur);
   }
-for (const name of [...langTotals.keys()])
-  if (EXCLUDE_LANGS.includes(name.toLowerCase())) langTotals.delete(name);
-const langSum = [...langTotals.values()].reduce((s, l) => s + l.size, 0) || 1;
-const allLangs = [...langTotals.entries()]
+// Prefer "what I actually write": commits in the past year, weighted by each
+// repo's primary language. Falls back to repo byte sizes when the commit
+// sample is too thin to be meaningful (e.g. public-only token).
+const commitLangs = new Map();
+let commitSample = 0;
+for (const r of cc.commitContributionsByRepository) {
+  const lang = r.repository.primaryLanguage;
+  if (!lang) continue;
+  const cur = commitLangs.get(lang.name) || { size: 0, color: lang.color || "#8b93b8" };
+  cur.size += r.contributions.totalCount;
+  commitSample += r.contributions.totalCount;
+  commitLangs.set(lang.name, cur);
+}
+const byCommits = commitSample >= 20;
+const langSource = byCommits ? commitLangs : langTotals;
+const langBasis = byCommits ? "by commits, past year" : "by repo size";
+// Byte-based stats only ever see repos you own; commit-based can also see
+// org/work repos — but only if the token is SSO-authorized for those orgs.
+const langScope = !privateIncluded
+  ? "public repos only"
+  : byCommits
+    ? "all repos this token can see"
+    : "own repos incl. private";
+for (const name of [...langSource.keys()])
+  if (EXCLUDE_LANGS.includes(name.toLowerCase())) langSource.delete(name);
+const langSum = [...langSource.values()].reduce((s, l) => s + l.size, 0) || 1;
+const allLangs = [...langSource.entries()]
   .map(([name, v]) => ({ name, color: v.color, pct: (v.size / langSum) * 100 }))
   .sort((a, b) => b.pct - a.pct);
 const topLangs = allLangs.slice(0, 6);
 console.log(
-  `Languages (${scopeNote}): ` +
+  `Languages (${langBasis}; ${scopeNote}): ` +
     allLangs.map((l) => `${l.name} ${l.pct.toFixed(1)}%`).join(", ")
 );
 
@@ -161,7 +190,7 @@ const fmt = (iso) =>
 
 function card(w, h, title, body, note) {
   const noteSvg = note
-    ? `<text x="${w - 16}" y="30" text-anchor="end" font-family="${FONT}" font-size="10" font-style="italic" fill="${C.dim}">${esc(note)}</text>`
+    ? `<text x="${w - 14}" y="${h - 12}" text-anchor="end" font-family="${FONT}" font-size="9" font-style="italic" fill="${C.dim}">${esc(note)}</text>`
     : "";
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}">
   <defs>
@@ -190,19 +219,31 @@ function card(w, h, title, body, note) {
 // ---------- card 1: stats ----------
 function statsCard() {
   const commits = cc.totalCommitContributions + cc.restrictedContributionsCount;
-  const rows = [
-    ["Commits (past year)", num(commits)],
-    ["Total Stars", num(stars)],
-    [privateIncluded ? "Repositories" : "Public Repos", num(user.repositories.totalCount)],
-    ["Pull Requests", num(cc.totalPullRequestContributions)],
-    ["Followers", num(user.followers.totalCount)],
-  ];
+  const rows = privateIncluded
+    ? [
+        ["Commits (past year)", num(commits)],
+        ["Pull Requests (past year)", num(cc.totalPullRequestContributions)],
+        ["Public Repos", num(user.publicRepos.totalCount)],
+        ["Private Repos", num(user.privateRepos.totalCount)],
+        ["Total Stars", num(stars)],
+        ["Followers", num(user.followers.totalCount)],
+      ]
+    : [
+        ["Commits (past year)", num(commits)],
+        ["Total Stars", num(stars)],
+        ["Public Repos", num(user.publicRepos.totalCount)],
+        ["Pull Requests", num(cc.totalPullRequestContributions)],
+        ["Followers", num(user.followers.totalCount)],
+      ];
+  const startY = rows.length > 5 ? 51 : 56;
+  const step = rows.length > 5 ? 18.5 : 21;
+  const fontSize = rows.length > 5 ? 12.8 : 13.5;
   const rowSvg = rows
     .map(
-      ([label, value], i) => `<g font-family="${FONT}" font-size="13.5">
-      <circle cx="26" cy="${56 + i * 21 - 4}" r="2.5" fill="${C.accent}"/>
-      <text x="38" y="${56 + i * 21}" fill="${C.text}">${esc(label)}</text>
-      <text x="222" y="${56 + i * 21}" fill="${C.accent}" font-weight="700">${esc(value)}</text>
+      ([label, value], i) => `<g font-family="${FONT}" font-size="${fontSize}">
+      <circle cx="26" cy="${startY + i * step - 4}" r="2.5" fill="${C.accent}"/>
+      <text x="38" y="${startY + i * step}" fill="${C.text}">${esc(label)}</text>
+      <text x="230" y="${startY + i * step}" fill="${C.accent}" font-weight="700">${esc(value)}</text>
     </g>`
     )
     .join("\n");
@@ -248,7 +289,12 @@ function langsCard() {
         <animateTransform attributeName="transform" type="translate" from="0 0" to="${barW + 80} 0" dur="3s" repeatCount="indefinite"/>
       </rect>
     </g>`;
-  return card(340, 165, "🚀 Most Used Languages", bar + legend, scopeNote);
+  return card(
+    340, 165,
+    byCommits ? "🚀 What I Actually Write" : "🚀 Most Used Languages",
+    bar + legend,
+    `${langBasis} · ${langScope}`
+  );
 }
 
 // ---------- card 3: streak ----------
