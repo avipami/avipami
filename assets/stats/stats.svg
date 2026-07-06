@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="165" viewBox="0 0 420 165" role="img" aria-label="⚡ Vinnie's GitHub Stats">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0620"/><stop offset="1" stop-color="#1c0f38"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="0.5" y="0.5" width="419" height="164" rx="8" fill="url(#bg)" stroke="#ff2d95" stroke-opacity="0.45"/>
+  <g stroke="#ff2d95" stroke-opacity="0.10">
+    <line x1="0" y1="147" x2="420" y2="147"/>
+    <line x1="0" y1="156" x2="420" y2="156"/>
+  </g>
+  <text x="20" y="30" font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#ff2d95" filter="url(#glow)">⚡ Vinnie's GitHub Stats</text>
+  <text x="406" y="153" text-anchor="end" font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="9" font-style="italic" fill="#8b93b8">includes private repos</text>
+  <g font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="12.8">
+      <circle cx="26" cy="47" r="2.5" fill="#7df9ff"/>
+      <text x="38" y="51" fill="#e6edf3">Commits (past year)</text>
+      <text x="230" y="51" fill="#7df9ff" font-weight="700">510</text>
+    </g>
+<g font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="12.8">
+      <circle cx="26" cy="65.5" r="2.5" fill="#7df9ff"/>
+      <text x="38" y="69.5" fill="#e6edf3">Pull Requests (past year)</text>
+      <text x="230" y="69.5" fill="#7df9ff" font-weight="700">0</text>
+    </g>
+<g font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="12.8">
+      <circle cx="26" cy="84" r="2.5" fill="#7df9ff"/>
+      <text x="38" y="88" fill="#e6edf3">Public Repos</text>
+      <text x="230" y="88" fill="#7df9ff" font-weight="700">17</text>
+    </g>
+<g font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="12.8">
+      <circle cx="26" cy="102.5" r="2.5" fill="#7df9ff"/>
+      <text x="38" y="106.5" fill="#e6edf3">Private Repos</text>
+      <text x="230" y="106.5" fill="#7df9ff" font-weight="700">42</text>
+    </g>
+<g font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="12.8">
+      <circle cx="26" cy="121" r="2.5" fill="#7df9ff"/>
+      <text x="38" y="125" fill="#e6edf3">Total Stars</text>
+      <text x="230" y="125" fill="#7df9ff" font-weight="700">0</text>
+    </g>
+<g font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="12.8">
+      <circle cx="26" cy="139.5" r="2.5" fill="#7df9ff"/>
+      <text x="38" y="143.5" fill="#e6edf3">Followers</text>
+      <text x="230" y="143.5" fill="#7df9ff" font-weight="700">6</text>
+    </g><g transform="translate(338 100)">
+    <circle r="42" fill="none" stroke="#ff2d95" stroke-opacity="0.25" stroke-width="8"/>
+    <circle r="42" fill="none" stroke="#ff2d95" stroke-width="4" filter="url(#glow)">
+      <animate attributeName="stroke-opacity" values="1;0.45;1" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
+    <text y="-2" text-anchor="middle" font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="19" font-weight="800" fill="#e6edf3">511</text>
+    <text y="16" text-anchor="middle" font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="10" fill="#8b93b8">contributions</text>
+    <text y="28" text-anchor="middle" font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="10" fill="#8b93b8">past year</text>
+  </g>
+</svg>
