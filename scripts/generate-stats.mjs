@@ -7,12 +7,18 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
-const TOKEN = process.env.GITHUB_TOKEN;
+// STATS_TOKEN (a user PAT) sees private repos; the default GITHUB_TOKEN only
+// sees public ones. The cards label themselves accordingly.
+const TOKEN = process.env.STATS_TOKEN || process.env.GITHUB_TOKEN;
 const USER = process.env.USER_LOGIN || process.env.USER || "avipami";
 const OUT = process.env.OUT || "dist";
+const EXCLUDE_LANGS = (process.env.EXCLUDE_LANGS || "")
+  .split(",")
+  .map((s) => s.trim().toLowerCase())
+  .filter(Boolean);
 
 if (!TOKEN) {
-  console.error("GITHUB_TOKEN is required");
+  console.error("STATS_TOKEN or GITHUB_TOKEN is required");
   process.exit(1);
 }
 
@@ -48,6 +54,7 @@ async function gql(query, variables) {
 
 const baseData = await gql(
   `query ($login: String!) {
+    viewer { login }
     user(login: $login) {
       createdAt
       followers { totalCount }
@@ -73,6 +80,11 @@ const baseData = await gql(
   { login: USER }
 );
 const user = baseData.user;
+// Repo-level data (stars, repo count, languages) covers private repos only when
+// the token belongs to the profile owner. Contribution counts always include
+// private activity (GitHub shows those publicly as anonymized counts).
+const privateIncluded = baseData.viewer.login.toLowerCase() === USER.toLowerCase();
+const scopeNote = privateIncluded ? "includes private repos" : "public repos only";
 
 // One aliased calendar query per account year, capped at 1-year ranges.
 const firstYear = new Date(user.createdAt).getUTCFullYear();
@@ -127,11 +139,17 @@ for (const repo of user.repositories.nodes)
     cur.size += e.size;
     langTotals.set(e.node.name, cur);
   }
+for (const name of [...langTotals.keys()])
+  if (EXCLUDE_LANGS.includes(name.toLowerCase())) langTotals.delete(name);
 const langSum = [...langTotals.values()].reduce((s, l) => s + l.size, 0) || 1;
-const topLangs = [...langTotals.entries()]
+const allLangs = [...langTotals.entries()]
   .map(([name, v]) => ({ name, color: v.color, pct: (v.size / langSum) * 100 }))
-  .sort((a, b) => b.pct - a.pct)
-  .slice(0, 6);
+  .sort((a, b) => b.pct - a.pct);
+const topLangs = allLangs.slice(0, 6);
+console.log(
+  `Languages (${scopeNote}): ` +
+    allLangs.map((l) => `${l.name} ${l.pct.toFixed(1)}%`).join(", ")
+);
 
 // ---------- svg helpers ----------
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -141,7 +159,10 @@ const fmt = (iso) =>
     ? new Date(iso + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })
     : "—";
 
-function card(w, h, title, body) {
+function card(w, h, title, body, note) {
+  const noteSvg = note
+    ? `<text x="${w - 16}" y="30" text-anchor="end" font-family="${FONT}" font-size="10" font-style="italic" fill="${C.dim}">${esc(note)}</text>`
+    : "";
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
@@ -158,6 +179,7 @@ function card(w, h, title, body) {
     <line x1="0" y1="${h - 9}" x2="${w}" y2="${h - 9}"/>
   </g>
   <text x="20" y="30" font-family="${FONT}" font-size="16" font-weight="700" fill="${C.title}" filter="url(#glow)">${esc(title)}</text>
+  ${noteSvg}
   ${body}
 </svg>`;
 }
@@ -171,7 +193,7 @@ function statsCard() {
   const rows = [
     ["Commits (past year)", num(commits)],
     ["Total Stars", num(stars)],
-    ["Public Repos", num(user.repositories.totalCount)],
+    [privateIncluded ? "Repositories" : "Public Repos", num(user.repositories.totalCount)],
     ["Pull Requests", num(cc.totalPullRequestContributions)],
     ["Followers", num(user.followers.totalCount)],
   ];
@@ -193,7 +215,7 @@ function statsCard() {
     <text y="16" text-anchor="middle" font-family="${FONT}" font-size="10" fill="${C.dim}">contributions</text>
     <text y="28" text-anchor="middle" font-family="${FONT}" font-size="10" fill="${C.dim}">past year</text>
   </g>`;
-  return card(420, 165, `⚡ ${USER === "avipami" ? "Vinnie" : USER}'s GitHub Stats`, rowSvg + ring);
+  return card(420, 165, `⚡ ${USER === "avipami" ? "Vinnie" : USER}'s GitHub Stats`, rowSvg + ring, scopeNote);
 }
 
 // ---------- card 2: top languages ----------
@@ -226,7 +248,7 @@ function langsCard() {
         <animateTransform attributeName="transform" type="translate" from="0 0" to="${barW + 80} 0" dur="3s" repeatCount="indefinite"/>
       </rect>
     </g>`;
-  return card(340, 165, "🚀 Most Used Languages", bar + legend);
+  return card(340, 165, "🚀 Most Used Languages", bar + legend, scopeNote);
 }
 
 // ---------- card 3: streak ----------
