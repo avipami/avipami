@@ -18,12 +18,12 @@
   <g font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="12.8">
       <circle cx="26" cy="47" r="2.5" fill="#7df9ff"/>
       <text x="38" y="51" fill="#e6edf3">Commits (past year)</text>
-      <text x="230" y="51" fill="#7df9ff" font-weight="700">510</text>
+      <text x="230" y="51" fill="#7df9ff" font-weight="700">512</text>
     </g>
 <g font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="12.8">
       <circle cx="26" cy="65.5" r="2.5" fill="#7df9ff"/>
-      <text x="38" y="69.5" fill="#e6edf3">Pull Requests (past year)</text>
-      <text x="230" y="69.5" fill="#7df9ff" font-weight="700">0</text>
+      <text x="38" y="69.5" fill="#e6edf3">Pull Requests</text>
+      <text x="230" y="69.5" fill="#7df9ff" font-weight="700">257</text>
     </g>
 <g font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="12.8">
       <circle cx="26" cy="84" r="2.5" fill="#7df9ff"/>
@@ -49,7 +49,7 @@
     <circle r="42" fill="none" stroke="#ff2d95" stroke-width="4" filter="url(#glow)">
       <animate attributeName="stroke-opacity" values="1;0.45;1" dur="2.4s" repeatCount="indefinite"/>
     </circle>
-    <text y="-2" text-anchor="middle" font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="19" font-weight="800" fill="#e6edf3">511</text>
+    <text y="-2" text-anchor="middle" font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="19" font-weight="800" fill="#e6edf3">513</text>
     <text y="16" text-anchor="middle" font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="10" fill="#8b93b8">contributions</text>
     <text y="28" text-anchor="middle" font-family="'Segoe UI', -apple-system, Ubuntu, Helvetica, sans-serif" font-size="10" fill="#8b93b8">past year</text>
   </g>

@@ -55,7 +55,9 @@ async function gql(query, variables) {
 const baseData = await gql(
   `query ($login: String!) {
     viewer { login }
+    prSearch: search(type: ISSUE, query: "is:pr author:${USER}", first: 1) { issueCount }
     user(login: $login) {
+      id
       createdAt
       followers { totalCount }
       repositories(first: 100, ownerAffiliations: OWNER, isFork: false) {
@@ -76,10 +78,6 @@ const baseData = await gql(
         totalPullRequestReviewContributions
         restrictedContributionsCount
         contributionCalendar { totalContributions }
-        commitContributionsByRepository(maxRepositories: 100) {
-          contributions { totalCount }
-          repository { primaryLanguage { name color } }
-        }
       }
     }
   }`,
@@ -145,18 +143,41 @@ for (const repo of user.repositories.nodes)
     cur.size += e.size;
     langTotals.set(e.node.name, cur);
   }
-// Prefer "what I actually write": commits in the past year, weighted by each
-// repo's primary language. Falls back to repo byte sizes when the commit
-// sample is too thin to be meaningful (e.g. public-only token).
+// Prefer "what I actually write": commits authored in the past year, weighted
+// by each repo's primary language. contributionsCollection anonymizes org-repo
+// activity into restrictedContributionsCount even for the owner's own token,
+// so instead we walk every repo the user contributed commits to and count
+// default-branch history authored by them directly — that sees everything the
+// token sees. Falls back to repo byte sizes when the sample is too thin.
+const sinceIso = new Date(Date.now() - 365 * 24 * 3600 * 1000).toISOString();
+const contribData = await gql(
+  `query ($login: String!, $authorId: ID!, $since: GitTimestamp!) {
+    user(login: $login) {
+      repositoriesContributedTo(first: 75, includeUserRepositories: true, contributionTypes: [COMMIT]) {
+        totalCount
+        nodes {
+          nameWithOwner
+          primaryLanguage { name color }
+          defaultBranchRef {
+            target { ... on Commit { history(since: $since, author: { id: $authorId }) { totalCount } } }
+          }
+        }
+      }
+    }
+  }`,
+  { login: USER, authorId: user.id, since: sinceIso }
+);
 const commitLangs = new Map();
 let commitSample = 0;
-for (const r of cc.commitContributionsByRepository) {
-  const lang = r.repository.primaryLanguage;
-  if (!lang) continue;
+for (const repo of contribData.user.repositoriesContributedTo.nodes) {
+  const lang = repo.primaryLanguage;
+  const count = repo.defaultBranchRef?.target?.history?.totalCount || 0;
+  if (!lang || count === 0) continue;
   const cur = commitLangs.get(lang.name) || { size: 0, color: lang.color || "#8b93b8" };
-  cur.size += r.contributions.totalCount;
-  commitSample += r.contributions.totalCount;
+  cur.size += count;
+  commitSample += count;
   commitLangs.set(lang.name, cur);
+  console.log(`  ${repo.nameWithOwner}: ${count} commits (${lang.name})`);
 }
 const byCommits = commitSample >= 20;
 const langSource = byCommits ? commitLangs : langTotals;
@@ -222,7 +243,7 @@ function statsCard() {
   const rows = privateIncluded
     ? [
         ["Commits (past year)", num(commits)],
-        ["Pull Requests (past year)", num(cc.totalPullRequestContributions)],
+        ["Pull Requests", num(baseData.prSearch.issueCount)],
         ["Public Repos", num(user.publicRepos.totalCount)],
         ["Private Repos", num(user.privateRepos.totalCount)],
         ["Total Stars", num(stars)],
@@ -232,7 +253,7 @@ function statsCard() {
         ["Commits (past year)", num(commits)],
         ["Total Stars", num(stars)],
         ["Public Repos", num(user.publicRepos.totalCount)],
-        ["Pull Requests", num(cc.totalPullRequestContributions)],
+        ["Pull Requests", num(baseData.prSearch.issueCount)],
         ["Followers", num(user.followers.totalCount)],
       ];
   const startY = rows.length > 5 ? 51 : 56;
